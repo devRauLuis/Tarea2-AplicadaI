@@ -68,5 +68,13 @@ namespace Tarea2
                 }
             return exists;
         }
+        public static List<Role> FindByDescription(string desc)
+        {
+
+            using (var context = new Context())
+            {
+                return context.UserRoles.Where(r => r.Description.Contains(desc)).ToList();
+            }
+        }
     }
 }

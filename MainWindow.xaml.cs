@@ -23,7 +23,6 @@ namespace Tarea2
 
         private Role selectedRole = new Role();
         private Role newRole = new Role();
-
         public MainWindow()
         {
             InitializeComponent();
@@ -34,8 +33,8 @@ namespace Tarea2
         private void GetRoles()
         {
             RolesDataGrid.ItemsSource = RoleService.GetAll();
-
         }
+
         private void onAddNewClick(object sender, EventArgs e)
         {
             newRole = (sender as FrameworkElement).DataContext as Role;
@@ -59,26 +58,53 @@ namespace Tarea2
             return valid;
         }
 
-        private void onEditClick(object sender, EventArgs e)
+        // private void onEditClick(object sender, EventArgs e)
+        // {
+        //     selectedRole = (sender as FrameworkElement).DataContext as Role;
+        //     EditRoleContainer.DataContext = selectedRole;
+        //     EditRoleWrapper.Visibility = Visibility.Visible;
+        // }
+
+
+        // private void onSaveAfterEditClick(object sender, EventArgs e)
+        // {
+        //     RoleService.Update(selectedRole);
+        //     GetRoles();
+        //     EditRoleWrapper.Visibility = Visibility.Collapsed;
+        // }
+
+        private void onDGSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            selectedRole = (sender as FrameworkElement).DataContext as Role;
-            EditRoleContainer.DataContext = selectedRole;
-            EditRoleWrapper.Visibility = Visibility.Visible;
+            selectedRole = RolesDataGrid.SelectedItem as Role;
+            ViewRoleContainer.DataContext = selectedRole;
         }
 
-
-        private void onSaveAfterEditClick(object sender, EventArgs e)
+        private void onSaveClick(object sender, EventArgs e)
         {
+
+            if (!Validate(newRole)) return;
             RoleService.Update(selectedRole);
             GetRoles();
-            EditRoleWrapper.Visibility = Visibility.Collapsed;
         }
+
 
         private void onDeleteClick(object sender, EventArgs e)
         {
-            var removedRole = (sender as FrameworkElement).DataContext as Role;
+            var removedRole = RolesDataGrid.SelectedItem as Role;
             RoleService.Delete(removedRole);
             GetRoles();
         }
+        private void onSearchClick(object sender, EventArgs e)
+        {
+            var search = SearchBox.Text;
+            var filteredRoles = RoleService.FindByDescription(search);
+            RolesDataGrid.ItemsSource = filteredRoles;
+        }
+        private void onClearClick(object sender, EventArgs e)
+        {
+            SearchBox.Text = "";
+            GetRoles();
+        }
+
     }
 }
