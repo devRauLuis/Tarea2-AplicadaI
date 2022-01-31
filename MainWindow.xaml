@@ -35,7 +35,17 @@
                                                         x:Name="AddNew"
                                                         HorizontalAlignment="Right"
                                                         Padding="6, 3"
-                                                        Click="onAddNewClick">Agregar nuevo</Button>
+                                                        Click="onAddNewClick">
+                                                <StackPanel Orientation="Horizontal">
+                                                        <TextBlock VerticalAlignment="Center">Agregar</TextBlock>
+                                                        <Image
+                                                                        Source="Resources/add.png"
+                                                                        Width="16"
+                                                                        Height="16"
+                                                                        VerticalAlignment="Center"
+                                                                        Margin="5,0,0,0" />
+                                                </StackPanel>
+                                        </Button>
                                 </StackPanel>
 
                         </Grid>
@@ -72,45 +82,67 @@
                                                 Click="onSaveClick"
                                                 Margin="0,0,10,0"
                                                 Padding="10, 5">
-                        Guardar
-💾
-                    </Button>
+                                        <StackPanel Orientation="Horizontal">
+                                                <TextBlock VerticalAlignment="Center">Guardar</TextBlock>
+                                                <Image
+                                                                Source="Resources/save.png"
+                                                                Width="16"
+                                                                Height="16"
+                                                                VerticalAlignment="Center"
+                                                                Margin="5,0,0,0" />
+                                        </StackPanel>
+                                </Button>
                                 <Button
                                                 x:Name="DeleteBtn"
                                                 Click="onDeleteClick"
                                                 Padding="10,5">
-                        Eliminar
-❌
-                    </Button>
+                                        <StackPanel Orientation="Horizontal">
+                                                <TextBlock VerticalAlignment="Center">Eliminar</TextBlock>
+                                                <Image
+                                                                Source="Resources/delete.png"
+                                                                Width="16"
+                                                                Height="16"
+                                                                VerticalAlignment="Center"
+                                                                Margin="5,0,0,0" />
+                                        </StackPanel>
+                                </Button>
                         </StackPanel>
                         <StackPanel
-                                        Orientation="Horizontal"
                                         HorizontalAlignment="Right"
                                         Margin="0,15,0,0">
-                                <StackPanel>
-                                        <Label>
-Buscar por nombre:
-</Label>
+                                <Label>Buscar por nombre:</Label>
+                                <StackPanel Orientation="Horizontal">
                                         <TextBox
                                                         x:Name="SearchBox"
                                                         Width="150" />
-                                </StackPanel>
+                                        <Button
+                                                        x:Name="SearchBtn"
+                                                        Click="onSearchClick"
+                                                        Padding="10,5"
+                                                        VerticalAlignment="Bottom"
+                                                        Margin="5,0">
+                                                <Image
+                                                                Source="\Resources\search.png"
+                                                                Width="16"
+                                                                Height="16" />
+                                        </Button>
+                                        <Button
+                                                        x:Name="ClearBtn"
+                                                        Click="onClearClick"
+                                                        Padding="10,5"
+                                                        VerticalAlignment="Bottom"
+                                                        Margin="5,0">
 
-                                <Button
-                                                x:Name="SearchBtn"
-                                                Click="onSearchClick"
-                                                Padding="10,5"
-                                                VerticalAlignment="Bottom"
-                                                Margin="5,0">🔎</Button>
-                                <Button
-                                                x:Name="ClearBtn"
-                                                Click="onClearClick"
-                                                Padding="10,5"
-                                                VerticalAlignment="Bottom"
-                                                Margin="5,0">🗑</Button>
+                                                <Image
+                                                                Source="\Resources\clear.png"
+                                                                Width="16"
+                                                                Height="16" />
+                                        </Button>
+                                </StackPanel>
                         </StackPanel>
+
                         <DataGrid
-                                        Margin="0, 20"
+                                        Margin="0,20"
                                         x:Name="RolesDataGrid"
                                         AlternatingRowBackground="lightgray"
                                         AlternationCount="2"

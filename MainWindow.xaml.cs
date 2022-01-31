@@ -50,28 +50,13 @@ namespace Tarea2
         {
 
             bool valid = true;
-            if (RoleService.Exists(newRole.Description) && newRole.Description.Length <= 0)
+            if (RoleService.Exists(newRole.Description) && newRole.Description.Length < 1)
             {
                 valid = false;
                 MessageBox.Show("Por favor ingrese un rol valido.", "Fallo", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             return valid;
         }
-
-        // private void onEditClick(object sender, EventArgs e)
-        // {
-        //     selectedRole = (sender as FrameworkElement).DataContext as Role;
-        //     EditRoleContainer.DataContext = selectedRole;
-        //     EditRoleWrapper.Visibility = Visibility.Visible;
-        // }
-
-
-        // private void onSaveAfterEditClick(object sender, EventArgs e)
-        // {
-        //     RoleService.Update(selectedRole);
-        //     GetRoles();
-        //     EditRoleWrapper.Visibility = Visibility.Collapsed;
-        // }
 
         private void onDGSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -94,12 +79,14 @@ namespace Tarea2
             RoleService.Delete(removedRole);
             GetRoles();
         }
+
         private void onSearchClick(object sender, EventArgs e)
         {
             var search = SearchBox.Text;
             var filteredRoles = RoleService.FindByDescription(search);
             RolesDataGrid.ItemsSource = filteredRoles;
         }
+
         private void onClearClick(object sender, EventArgs e)
         {
             SearchBox.Text = "";

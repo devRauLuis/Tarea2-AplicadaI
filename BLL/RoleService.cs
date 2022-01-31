@@ -59,11 +59,15 @@ namespace Tarea2
 
         public static bool Exists(string Description)
         {
-            bool exists = false;
+            var exists = false;
             if (Description is not null)
                 using (var context = new Context())
                 {
-                    try { exists = context.UserRoles.Any(x => x.Description == Description); }
+                    try
+                    {
+                        exists = context.UserRoles.Where(r => r.Description == Description).FirstOrDefault() is not null;
+                    }
+
                     catch (Exception ex) { }
                 }
             return exists;
@@ -73,7 +77,7 @@ namespace Tarea2
 
             using (var context = new Context())
             {
-                return context.UserRoles.Where(r => r.Description.Contains(desc)).ToList();
+                return context.UserRoles.Where(r => r.Description.ToLower().Contains(desc.ToLower())).ToList();
             }
         }
     }
